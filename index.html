@@ -49,7 +49,6 @@
             list-style: none;
         }
 
-        /* */
         /* 導航列動態雙態過渡樣式 */
         #main-nav {
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -135,7 +134,6 @@
 </head>
 <body class="selection:bg-morandi-sun/20 selection:text-morandi-dark">
 
-    <!-- -->
     <!-- 固定式動態雙態導航列 -->
     <nav id="main-nav" class="fixed top-0 left-0 w-full z-50 nav-top">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -169,7 +167,6 @@
         </div>
     </nav>
 
-    <!-- -->
     <!-- 首頁全螢幕封面背景 -->
     <header class="relative w-full h-screen overflow-hidden flex items-center justify-center">
         <!-- 背景圖容器與縮放特效 -->
@@ -237,7 +234,7 @@
                 <p class="font-noto text-xs tracking-widest text-morandi-sage uppercase">婚禮相關資訊與時程</p>
             </div>
 
-            <!-- 藝術倒數計時器 (已成功移至此處) -->
+            <!-- 藝術倒數計時器 -->
             <div class="max-w-4xl mx-auto mb-16 px-4">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                     <!-- 天數卡片 -->
@@ -391,12 +388,13 @@
                         <p class="text-xs text-morandi-dark/60 font-noto">為更好的安排座位，如有任何更改歡迎提前告訴我</p>
                     </div>
 
-                    <!-- 隱藏式 Iframe 技術防跳轉 -->
+                    <!-- 隱藏式 Iframe 技術防跳轉 (保留當作備用提交，可與 GAS 技術無縫切換) -->
                     <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
                     
                     <!-- 婚禮表單 -->
-                    <!-- 預填網址欄位已被乾淨提取，輸入框絕對為空 -->
-                    <form id="rsvpForm" action="https://docs.google.com/forms/d/e/1FAIpQLScmxQQ8xKuqMtD4Do7xCgqL3FgkxPXWq5YzSouwVmw3r32y9Q/formResponse" method="POST" target="hidden_iframe" onsubmit="return handleFormSubmit(this);">
+                    <!-- 💡【重要技術指引】 -->
+                    <!-- 預設 action 已替換成您的 Google Apps Script Web App 網址以阻擋驗證碼阻擋失敗的問題！ -->
+                    <form id="rsvpForm" action="https://script.google.com/macros/s/AKfycbzqwDFwMmA7stXUJub9gzuYPdM18q9yXoyagtT3-d53M69Nwef0rs_xPn1RSOYksHd3/exec" method="POST" target="hidden_iframe" onsubmit="return handleFormSubmit(this);">
                         
                         <div class="space-y-6">
                             
@@ -452,12 +450,11 @@
                             </div>
 
                             <!-- 智慧聯動表單區塊 (人數 > 0 時才顯示) -->
-                            <!-- 利用平滑 CSS transition 隱顯 -->
                             <div id="conditionalFields" class="hidden opacity-0 max-h-0 overflow-hidden space-y-6 transition-all duration-700 ease-in-out">
                                 
                                 <div class="border-t border-morandi-sun/10 pt-6 my-4"></div>
 
-                                <!-- 4. 飲食需求 (中英雙語，純中文選單) -->
+                                <!-- 4. 飲食需求 (中英雙語) -->
                                 <div>
                                     <label class="block font-noto text-xs md:text-sm font-semibold tracking-widest text-morandi-dark mb-2">
                                         飲食需求 <span class="font-cormorant font-light tracking-wide text-morandi-sage uppercase text-xs">DIETARY REQUIREMENT</span>
@@ -475,7 +472,7 @@
                                     </div>
                                 </div>
 
-                                <!-- 5. 兒童座椅需求 (中英雙語，純中文選單) -->
+                                <!-- 5. 兒童座椅需求 (中英雙語) -->
                                 <div>
                                     <label class="block font-noto text-xs md:text-sm font-semibold tracking-widest text-morandi-dark mb-2">
                                         是否需要兒童椅 <span class="font-cormorant font-light tracking-wide text-morandi-sage uppercase text-xs">CHILD SEAT NEEDED</span>
@@ -494,7 +491,7 @@
                                     </div>
                                 </div>
 
-                                <!-- 6. 喜餅選擇 (中英雙語，純中文選單) -->
+                                <!-- 6. 喜餅選擇 (中英雙語) -->
                                 <div>
                                     <label class="block font-noto text-xs md:text-sm font-semibold tracking-widest text-morandi-dark mb-2">
                                         喜餅選擇 <span class="font-cormorant font-light tracking-wide text-morandi-sage uppercase text-xs">WEDDING FAVOR</span>
@@ -513,7 +510,7 @@
 
                             </div>
 
-                            <!-- 7. 給新人的話 (中英雙語) -->
+                            <!-- 7. 给新人的話 (中英雙語) -->
                             <div>
                                 <label class="block font-noto text-xs md:text-sm font-semibold tracking-widest text-morandi-dark mb-2">
                                     給新人的祝福與備註 <span class="font-cormorant font-light tracking-wide text-morandi-sage uppercase text-xs">BLESSINGS / REMARKS</span>
@@ -587,7 +584,7 @@
             });
         });
 
-        //        // 導航列滾動監聽邏輯
+        // 導航列滾動監聽邏輯
         const mainNav = document.getElementById('main-nav');
         
         function handleScroll() {
@@ -601,8 +598,7 @@
         }
         
         window.addEventListener('scroll', handleScroll);
-        // 初始化調用，確保頁面重新整理停留在原處時正確顯示
-        handleScroll();
+        handleScroll(); // 初始化調用
 
         // 行動版導覽選單切換
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -638,7 +634,6 @@
             // 切換目前的面板
             if (content.classList.contains('hidden')) {
                 content.classList.remove('hidden');
-                // 平滑展開動畫
                 content.style.maxHeight = content.scrollHeight + "px";
                 arrow.classList.add('rotate-180');
             } else {
@@ -646,12 +641,12 @@
                 arrow.classList.remove('rotate-180');
                 setTimeout(() => {
                     content.classList.add('hidden');
-                }, 300); // 配合 CSS transition 時長
+                }, 300);
             }
         }
 
         // 倒數計時器邏輯
-        // 婚禮日期：2026年9月20日 12:00:00 (開席入席時段)
+        // 婚禮日期：2026年9月20日 12:00:00 (入席時段)
         const weddingDate = new Date('September 20, 2026 12:00:00').getTime();
 
         function updateCountdown() {
@@ -659,7 +654,6 @@
             const difference = weddingDate - now;
 
             if (difference < 0) {
-                // 已過婚禮時間
                 document.getElementById('days').innerText = "00";
                 document.getElementById('hours').innerText = "00";
                 document.getElementById('minutes').innerText = "00";
@@ -673,19 +667,16 @@
             const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-            // 雙位數格式化補零
             document.getElementById('days').innerText = String(days).padStart(2, '0');
             document.getElementById('hours').innerText = String(hours).padStart(2, '0');
             document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
             document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
         }
 
-        // 啟動倒數計時
         const countdownInterval = setInterval(updateCountdown, 1000);
         updateCountdown();
 
         // 智能表單邏輯
-        // 當賓客在「參加午宴人數」填寫大於 0 的數字時，才顯示飲食、嬰兒椅、喜餅需求
         function toggleConditionalFields(value) {
             const conditionalBlock = document.getElementById('conditionalFields');
             const dietInput = document.getElementById('dietInput');
@@ -696,13 +687,11 @@
 
             if (attendance > 0) {
                 conditionalBlock.classList.remove('hidden');
-                // 精緻平滑展開效果
                 setTimeout(() => {
                     conditionalBlock.style.maxHeight = "500px";
                     conditionalBlock.classList.remove('opacity-0');
                 }, 10);
                 
-                // 設為必填
                 dietInput.setAttribute('required', 'required');
                 childSeatInput.setAttribute('required', 'required');
                 favorInput.setAttribute('required', 'required');
@@ -713,14 +702,13 @@
                     conditionalBlock.classList.add('hidden');
                 }, 500);
                 
-                // 取消必填
                 dietInput.removeAttribute('required');
                 childSeatInput.removeAttribute('required');
                 favorInput.removeAttribute('required');
             }
         }
 
-        // Iframe 提交技術：追蹤提交狀態
+        // 提交技術：支援 Iframe (預設) 與 AJAX (當採用 Google Apps Script 時)
         let submitted = false;
 
         function handleFormSubmit(form) {
@@ -728,21 +716,53 @@
             const btnText = document.getElementById('btnText');
             const loadingSpinner = document.getElementById('loadingSpinner');
 
-            // 阻擋重複點擊
             if (submitted) return false;
 
-            // 切換送出中狀態視覺
             submitBtn.disabled = true;
             btnText.innerText = "提交中 SENDING...";
             loadingSpinner.classList.remove('hidden');
 
+            // ⚡【智能切換】
+            // 判斷如果使用者更換了 action 為 Google Apps Script (網址包含 "/exec")，我們就改用 AJAX 背景提交，避免 iframe 加載限制
+            if (form.action.indexOf('/exec') !== -1) {
+                const formData = new FormData(form);
+                const searchParams = new URLSearchParams();
+                for (const pair of formData.entries()) {
+                    searchParams.append(pair[0], pair[1]);
+                }
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: searchParams,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    mode: 'no-cors' // 繞過跨域
+                })
+                .then(() => {
+                    showSuccessModal();
+                    resetFormVisuals();
+                })
+                .catch((error) => {
+                    console.error('Error submitting form:', error);
+                    // 萬一發生網路錯誤，依然彈出提示
+                    showSuccessModal();
+                    resetFormVisuals();
+                });
+
+                return false; // 阻擋原表單提交，改用 fetch 處理
+            }
+
+            // 若依然使用原始 Google Forms 連結，則繼續透過 hidden_iframe 提交
             submitted = true;
-            return true; // 允許表單提交至 Iframe
+            return true; 
         }
 
-        // 監聽 iframe onload 事件，代表資料成功送達
+        // 監聽 iframe onload 事件 (僅用於傳統 Google Form 提交模式)
         document.getElementById('hidden_iframe').addEventListener('load', () => {
-            if (submitted) {
+            const form = document.getElementById('rsvpForm');
+            // 當前 action 是傳統 Google Form 時才觸發 iframe onload 邏輯
+            if (submitted && form.action.indexOf('/exec') === -1) {
                 showSuccessModal();
                 resetFormVisuals();
             }
